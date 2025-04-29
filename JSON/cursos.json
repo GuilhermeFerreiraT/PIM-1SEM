@@ -1,0 +1,116 @@
+[
+    {
+        "id_curso": 1,
+        "titulo": "Python para Iniciantes",
+        "classe": 1,
+        "modulos": [
+            {
+                "id_modulo": 1,
+                "nome": "Módulo 1: Introdução ao Python",
+                "conteudo": "Python é uma linguagem de programação de alto nível criada para ser simples de aprender e ler..."
+            },
+            {
+                "id_modulo": 2,
+                "nome": "Módulo 2: Sintaxe e Identação",
+                "conteudo": "Ao contrário de muitas outras linguagens, Python usa a indentação (espaços no início da linha)..."
+            },
+            {
+                "id_modulo": 3,
+                "nome": "Módulo 3: Tipos de Dados e Variáveis",
+                "conteudo": "Em Python, você pode armazenar diferentes tipos de informações em variáveis..."
+            }
+        ]
+    },
+    {
+        "id_curso": 2,
+        "titulo": "Banco de Dados",
+        "classe": 1,
+        "modulos": [
+            {
+                "id_modulo": 10,
+                "nome": "Módulo 1: O que é um Banco de Dados?",
+                "conteudo": "Um banco de dados é uma coleção organizada de dados que pode ser facilmente acessada..."
+            },
+            {
+                "id_modulo": 11,
+                "nome": "Módulo 2: Modelagem de Dados",
+                "conteudo": "Modelagem de dados é o processo de criar um modelo para os dados que serão armazenados..."
+            },
+            {
+                "id_modulo": 12,
+                "nome": "Módulo 3: SQL - Structured Query Language",
+                "conteudo": "SQL é a linguagem padrão para interagir com bancos de dados relacionais..."
+            }
+        ]
+    },
+    {
+        "id_curso": 3,
+        "titulo": "Lógica de Programação",
+        "classe": 1,
+        "modulos": [
+            {
+                "id_modulo": 13,
+                "nome": "Módulo 1: Introdução à Lógica",
+                "conteudo": "Lógica é a base do pensamento computacional..."
+            }
+        ]
+    },
+    {
+        "id_curso": 4,
+        "titulo": "Engenharia de Software",
+        "classe": 2,
+        "modulos": [
+            {
+                "id_modulo": 7,
+                "nome": "Módulo 1: O que é Engenharia de Software?",
+                "conteudo": "Engenharia de software é o campo que aplica princípios da engenharia para o desenvolvimento de sistemas..."
+            },
+            {
+                "id_modulo": 8,
+                "nome": "Módulo 2: Ciclo de Vida de Software",
+                "conteudo": "O ciclo de vida do software inclui etapas como: levantamento de requisitos, projeto, codificação..."
+            },
+            {
+                "id_modulo": 9,
+                "nome": "Módulo 3: Metodologias de Desenvolvimento",
+                "conteudo": "Existem várias metodologias como o modelo Cascata, Scrum, Kanban e XP..."
+            }
+        ]
+    },
+    {
+        "id_curso": 5,
+        "titulo": "Cibersegurança para Iniciantes",
+        "classe": 2,
+        "modulos": [
+            {
+                "id_modulo": 4,
+                "nome": "Módulo 1: Conceitos Básicos",
+                "conteudo": "Cibersegurança é a prática de proteger sistemas, redes e programas contra ataques digitais..."
+            },
+            {
+                "id_modulo": 5,
+                "nome": "Módulo 2: Tipos de Ameaças Digitais",
+                "conteudo": "As ameaças digitais podem incluir vírus, worms, ransomwares, phishing..."
+            },
+            {
+                "id_modulo": 6,
+                "nome": "Módulo 3: Boas Práticas de Segurança",
+                "conteudo": "Algumas boas práticas incluem manter sistemas atualizados, usar senhas fortes..."
+            }
+        ]
+    },
+    {
+        "id_curso": 6,
+        "titulo": "cursto teste",
+        "modulos": [
+            {
+                "nome": "modulo",
+                "conteudo": "modulo1"
+            },
+            {
+                "nome": "modulo2",
+                "conteudo": "xx"
+            }
+        ]
+    }
+]

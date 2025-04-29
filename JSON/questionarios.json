@@ -1,0 +1,236 @@
+[
+    {
+        "titulo": "O que é Python?",
+        "pergunta": "O que é Python?",
+        "opcoes": [
+            "Uma fruta",
+            "Um tipo de hardware",
+            "Uma linguagem de programação",
+            "Um vírus"
+        ],
+        "resposta_correta": 2,
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 1: Introdução ao Python"
+    },
+    {
+        "titulo": "Qual dessas áreas utiliza Python?",
+        "pergunta": "Qual dessas áreas utiliza Python?",
+        "opcoes": [
+            "Artesanato",
+            "Ciência de dados",
+            "Engenharia mecânica",
+            "Agricultura"
+        ],
+        "resposta_correta": 1,
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 1: Introdução ao Python"
+    },
+    {
+        "titulo": "Como Python indica blocos de código?",
+        "pergunta": "Como Python indica blocos de código?",
+        "opcoes": [
+            "Com colchetes",
+            "Com ponto e vírgula",
+            "Com indentação",
+            "Com chaves"
+        ],
+        "resposta_correta": 2,
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 2: Sintaxe e Identação"
+    },
+    {
+        "titulo": "Em Python, o ponto e vírgula é:",
+        "pergunta": "Em Python, o ponto e vírgula é:",
+        "opcoes": [
+            "Obrigatório no final",
+            "Usado para comentar",
+            "Opcional",
+            "Usado para loops"
+        ],
+        "resposta_correta": 2,
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 2: Sintaxe e Identação"
+    },
+    {
+        "titulo": "Qual tipo representa números inteiros em Python?",
+        "pergunta": "Qual tipo representa números inteiros em Python?",
+        "opcoes": [
+            "str",
+            "float",
+            "bool",
+            "int"
+        ],
+        "resposta_correta": 3,
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 3: Tipos de Dados e Variáveis"
+    },
+    {
+        "titulo": "Qual tipo é usado para verdadeiro/falso?",
+        "pergunta": "Qual tipo é usado para verdadeiro/falso?",
+        "opcoes": [
+            "int",
+            "str",
+            "bool",
+            "float"
+        ],
+        "resposta_correta": 2,
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 3: Tipos de Dados e Variáveis"
+    },
+    {
+        "titulo": "Qual é o principal objetivo da cibersegurança?",
+        "pergunta": "Qual é o principal objetivo da cibersegurança?",
+        "opcoes": [
+            "Criar redes sociais",
+            "Proteger sistemas e dados contra ataques",
+            "Desenvolver hardware",
+            "Apagar arquivos suspeitos"
+        ],
+        "resposta_correta": 1,
+        "curso": "Cibersegurança para Iniciantes",
+        "modulo": "Módulo 1: Conceitos Básicos"
+    },
+    {
+        "titulo": "Qual das opções é uma boa prática de segurança?",
+        "pergunta": "Qual das opções é uma boa prática de segurança?",
+        "opcoes": [
+            "Usar a mesma senha",
+            "Deixar antivírus desatualizado",
+            "Usar 2FA",
+            "Compartilhar senhas"
+        ],
+        "resposta_correta": 2,
+        "curso": "Cibersegurança para Iniciantes",
+        "modulo": "Módulo 1: Conceitos Básicos"
+    },
+    {
+        "titulo": "O que é phishing?",
+        "pergunta": "O que é phishing?",
+        "opcoes": [
+            "Firewall",
+            "Atualização",
+            "Força bruta",
+            "Enganar usuários para roubo de dados"
+        ],
+        "resposta_correta": 3,
+        "curso": "Cibersegurança para Iniciantes",
+        "modulo": "Módulo 2: Tipos de Ameaças Digitais"
+    },
+    {
+        "titulo": "Qual dessas é uma ameaça digital?",
+        "pergunta": "Qual dessas é uma ameaça digital?",
+        "opcoes": [
+            "Roteador",
+            "Phishing",
+            "Firewall",
+            "Backup"
+        ],
+        "resposta_correta": 1,
+        "curso": "Cibersegurança para Iniciantes",
+        "modulo": "Módulo 2: Tipos de Ameaças Digitais"
+    },
+    {
+        "titulo": "Por que atualizar sistemas?",
+        "pergunta": "Por que atualizar sistemas?",
+        "opcoes": [
+            "Mais espaço",
+            "Mudar visual",
+            "Corrigir falhas de segurança",
+            "Evitar propagandas"
+        ],
+        "resposta_correta": 2,
+        "curso": "Cibersegurança para Iniciantes",
+        "modulo": "Módulo 3: Boas Práticas de Segurança"
+    },
+    {
+        "titulo": "Qual NÃO é uma boa prática de segurança?",
+        "pergunta": "Qual NÃO é uma boa prática de segurança?",
+        "opcoes": [
+            "Senhas fortes",
+            "Antivírus atualizado",
+            "Evitar links suspeitos",
+            "Compartilhar senhas"
+        ],
+        "resposta_correta": 3,
+        "curso": "Cibersegurança para Iniciantes",
+        "modulo": "Módulo 3: Boas Práticas de Segurança"
+    },
+    {
+        "titulo": "O que é Engenharia de Software?",
+        "pergunta": "O que é Engenharia de Software?",
+        "opcoes": [
+            "Criação de hardware",
+            "Desenvolvimento estruturado de sistemas",
+            "Conserto de PCs",
+            "Instalação de rede"
+        ],
+        "resposta_correta": 1,
+        "curso": "Engenharia de Software",
+        "modulo": "Módulo 1: O que é Engenharia de Software?"
+    },
+    {
+        "titulo": "Objetivo da Engenharia de Software?",
+        "pergunta": "Objetivo da Engenharia de Software?",
+        "opcoes": [
+            "Complicar projetos",
+            "Criar jogos",
+            "Manter desorganização",
+            "Qualidade e eficiência"
+        ],
+        "resposta_correta": 3,
+        "curso": "Engenharia de Software",
+        "modulo": "Módulo 1: O que é Engenharia de Software?"
+    },
+    {
+        "titulo": "Primeira etapa do ciclo de vida?",
+        "pergunta": "Primeira etapa do ciclo de vida?",
+        "opcoes": [
+            "Codificação",
+            "Manutenção",
+            "Requisitos",
+            "Testes"
+        ],
+        "resposta_correta": 2,
+        "curso": "Engenharia de Software",
+        "modulo": "Módulo 2: Ciclo de Vida de Software"
+    },
+    {
+        "titulo": "Após codificação vem?",
+        "pergunta": "Após codificação vem?",
+        "opcoes": [
+            "Requisitos",
+            "Testes",
+            "Design gráfico",
+            "Manutenção"
+        ],
+        "resposta_correta": 1,
+        "curso": "Engenharia de Software",
+        "modulo": "Módulo 2: Ciclo de Vida de Software"
+    },
+    {
+        "titulo": "O que caracteriza o Scrum?",
+        "pergunta": "O que caracteriza o Scrum?",
+        "opcoes": [
+            "Fases rígidas",
+            "Documentação extensa",
+            "Entregas curtas e colaboração",
+            "Sem planejamento"
+        ],
+        "resposta_correta": 2,
+        "curso": "Engenharia de Software",
+        "modulo": "Módulo 3: Metodologias de Desenvolvimento"
+    },
+    {
+        "titulo": "Qual é uma metodologia ágil?",
+        "pergunta": "Qual é uma metodologia ágil?",
+        "opcoes": [
+            "Cascata",
+            "Scrum",
+            "Modelo em V",
+            "Modelo Espiral"
+        ],
+        "resposta_correta": 1,
+        "curso": "Engenharia de Software",
+        "modulo": "Módulo 3: Metodologias de Desenvolvimento"
+    }
+]

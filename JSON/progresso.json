@@ -1,0 +1,62 @@
+[
+    {
+        "usuario": "aluno",
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 1: Introdução ao Python",
+        "pontos": 2
+    },
+    {
+        "usuario": "aluno",
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 2: Sintaxe e Identação",
+        "pontos": 2
+    },
+    {
+        "usuario": "aluno",
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 3: Tipos de Dados e Variáveis",
+        "pontos": 1
+    },
+    {
+        "usuario": "aluno",
+        "curso": "Engenharia de Software",
+        "modulo": "Módulo 2: Ciclo de Vida de Software",
+        "pontos": 0
+    },
+    {
+        "usuario": "aluno",
+        "curso": "Engenharia de Software",
+        "modulo": "Módulo 1: O que é Engenharia de Software?",
+        "pontos": 0
+    },
+    {
+        "usuario": "aluno",
+        "curso": "Engenharia de Software",
+        "modulo": "Módulo 3: Metodologias de Desenvolvimento",
+        "pontos": 0
+    },
+    {
+        "usuario": "guilherme@gmail.com",
+        "curso": "Cibersegurança para Iniciantes",
+        "modulo": "Módulo 1: Conceitos Básicos",
+        "pontos": 2
+    },
+    {
+        "usuario": "guilherme@gmail.com",
+        "curso": "Cibersegurança para Iniciantes",
+        "modulo": "Módulo 2: Tipos de Ameaças Digitais",
+        "pontos": 2
+    },
+    {
+        "usuario": "helo",
+        "curso": "Cibersegurança para Iniciantes",
+        "modulo": "Módulo 1: Conceitos Básicos",
+        "pontos": 2
+    },
+    {
+        "usuario": "helo",
+        "curso": "Cibersegurança para Iniciantes",
+        "modulo": "Módulo 2: Tipos de Ameaças Digitais",
+        "pontos": 0
+    }
+]

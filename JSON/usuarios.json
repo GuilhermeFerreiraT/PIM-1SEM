@@ -1,0 +1,162 @@
+[
+    {
+        "id_usuario": 1,
+        "nome": "adm",
+        "email": "adm",
+        "senha": "$2b$12$Rh0CLLEaFRWp2p3JDqUbsOHb5/OWRjRgqr6OCE8.iP.wH/eii5DLy",
+        "perfil": "admin",
+        "idade": 35,
+        "cidade": "São Paulo",
+        "classe": null
+    },
+    {
+        "id_usuario": 2,
+        "nome": "aluno",
+        "email": "aluno",
+        "senha": "$2b$12$f3xlwLgTGZc6y5kdTy2nqeu4Ecwh1Cdoge.3q36abkwynd483.5Ua",
+        "perfil": "aluno",
+        "idade": 20,
+        "cidade": "Rio de Janeiro",
+        "classe": 1
+    },
+    {
+        "id_usuario": 3,
+        "nome": "guilherme",
+        "email": "guilherme@gmail.com",
+        "senha": "$2b$12$sXrh.zsJf7TJCgMsY22i8evDAyNhrp6ziSYAcnLhyWvVjv8.bN5JG",
+        "perfil": "aluno",
+        "idade": 19,
+        "cidade": "santana",
+        "classe": 2
+    },
+    {
+        "id_usuario": 4,
+        "nome": "duda",
+        "email": "duda",
+        "senha": "$2b$12$CG6qiox4JZMndICkyaWJAevr4yT.Xtayb2W/Zzi4fPXtSW1I.14Ru",
+        "perfil": "aluno",
+        "idade": 15,
+        "cidade": "santana",
+        "classe": 1
+    },
+    {
+        "id_usuario": 5,
+        "nome": "anna",
+        "email": "anna",
+        "senha": "$2b$12$5WDZWsqF6GqHO3X5vx/GieTFF.uHVYOxHmBkim4.Lb7/nvoQ.n3TW",
+        "perfil": "aluno",
+        "idade": 6,
+        "cidade": "santana",
+        "classe": 3
+    },
+    {
+        "id_usuario": 6,
+        "nome": "moises",
+        "email": "moises",
+        "senha": "$2b$12$eSn5XPIi6mOTcfyTilyNkuRj/sCxVk8Ts/1bhx91Tx3QqpZUxSLBi",
+        "perfil": "aluno",
+        "idade": 30,
+        "cidade": "santana",
+        "classe": 3
+    },
+    {
+        "id_usuario": 7,
+        "nome": "teste",
+        "email": "teste",
+        "senha": "$2b$12$PQ0w8iPt/e9DEc1ZUgt1VeRvuymOWpBPUIQ5nwvqstDG/fgo8hyV2",
+        "perfil": "aluno",
+        "idade": 15,
+        "cidade": "nova iguaçu",
+        "classe": 1
+    },
+    {
+        "id_usuario": 8,
+        "nome": "testando",
+        "email": "testando@gmail.com",
+        "senha": "$2b$12$ETqsKOKS0bM11xvBwcmkR.uCSkLtmdacNTnT8JmHpTO76zYMVhARi",
+        "perfil": "aluno",
+        "idade": 10,
+        "cidade": "santana",
+        "classe": 3
+    },
+    {
+        "id_usuario": 9,
+        "nome": "aluno69",
+        "email": "aluno69@gmail.com",
+        "senha": "$2b$12$s0PX4ZlUFLWJewuw94mbF.gLfrQWjSYBG2fOvBAWCymzXi0aLg33G",
+        "perfil": "aluno",
+        "idade": 17,
+        "cidade": "jundiai",
+        "classe": 2
+    },
+    {
+        "id_usuario": 10,
+        "nome": "teste2",
+        "email": "teste2",
+        "senha": "$2b$12$12vSAc7J.3e.tzA5beoXoehFByLxpvs/QhvMx5E4CG5mqoAnMLSnS",
+        "perfil": "aluno",
+        "idade": 10,
+        "cidade": "cajamar",
+        "classe": 1
+    },
+    {
+        "id_usuario": 11,
+        "nome": "a",
+        "email": "a@gmail.com",
+        "senha": "$2b$12$YBaflOtNqym4cR0y3SrEU.Vv8Q/Zm.iXteQuSK8lPmijG/d9MKWHa",
+        "perfil": "aluno",
+        "idade": 10,
+        "cidade": "jundiai",
+        "classe": 1
+    },
+    {
+        "id_usuario": 12,
+        "nome": "aninha",
+        "email": "aninha",
+        "senha": "$2b$12$rVgRcNkFDAowfsCKXEK3iOj5IExmn9ttp77Zl5umRNdW6tB0.vRJO",
+        "perfil": "aluno",
+        "idade": 5,
+        "cidade": "santana",
+        "classe": 1
+    },
+    {
+        "id_usuario": 13,
+        "nome": "mateus",
+        "email": "mateus",
+        "senha": "$2b$12$uvZ8uRVPOYKH1K0OClNc1u3kMH4WvuztUsvUDLslgn0OUYndNINBG",
+        "perfil": "aluno",
+        "idade": 15,
+        "cidade": "santana",
+        "classe": 2
+    },
+    {
+        "id_usuario": 14,
+        "nome": "helo",
+        "email": "helo",
+        "senha": "$2b$12$uygDnM7eBG.LyaRkR.ohF.wP28qTnq6jwLxeqPrn7cs0NPajmAZom",
+        "perfil": "aluno",
+        "idade": 30,
+        "cidade": "recife",
+        "classe": 2
+    },
+    {
+        "id_usuario": 15,
+        "nome": "superidol",
+        "email": "superidol",
+        "senha": "$2b$12$sVNvtxY9JYbAS81.sQ9lJ.qfQ0UqdsWLBcjjyUpta.8v1RrqTOcuC",
+        "perfil": "aluno",
+        "idade": 30,
+        "cidade": "china",
+        "classe": 1
+    },
+    {
+        "id_usuario": 16,
+        "nome": "mcig",
+        "email": "mcig",
+        "senha": "$2b$12$78mPCJa/h4fI2ioSZzND8uQPsnTE0tyGtG21d5PT/wJbxb538U0p2",
+        "perfil": "aluno",
+        "idade": 1,
+        "cidade": "120",
+        "classe": 1
+    }
+]
