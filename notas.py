@@ -3,9 +3,11 @@ import os  # Import necessário para localizar a pasta de Downloads
 from config import console, sessao
 from utils import carregar_progresso, carregar_cursos, carregar_usuarios
 from collections import defaultdict
+import pandas as pd
+import numpy as np  # Substituir statistics por numpy
 from openpyxl import Workbook
 
-USUARIOS_JSON = "SRC/NP1OFC/JSON/usuarios.json"
+USUARIOS_JSON = "NP1OFC/JSON/usuarios.json"
 
 def salvar_usuarios(usuarios):
     # Salva os usuários no arquivo JSON.
@@ -31,7 +33,23 @@ def atualizar_classe_usuario(usuario_email):
         salvar_usuarios(usuarios)
         console.print(f"[green]Usuário {usuario['nome']} avançou para a classe {usuario['classe']}![/green]")
 
+def adicionar_nota_maxima_cursos(df_cursos, df_questionarios):
+    """
+    Adiciona a nota máxima aos cursos com base na quantidade de questionários vinculados.
+    """
+    # Calcula a quantidade de questionários por curso
+    questionarios_por_curso = df_questionarios.groupby('curso')['id'].count().reset_index()
+    questionarios_por_curso.columns = ['titulo', 'nota_maxima']
+
+    # Adiciona a nota máxima ao DataFrame de cursos
+    df_cursos = df_cursos.merge(questionarios_por_curso, on='titulo', how='left')
+    df_cursos['nota_maxima'] = df_cursos['nota_maxima'].fillna(0).astype(int)
+
+    return df_cursos
+
 def gerar_relatorio_excel():
+
+    from utils import carregar_questionarios
     # Gera um relatório Excel com as notas.
     progresso = carregar_progresso()
     usuarios = carregar_usuarios()
@@ -41,47 +59,84 @@ def gerar_relatorio_excel():
         console.print("[yellow]Nenhum progresso registrado até o momento.[/yellow]")
         return
 
-    # Criar um novo workbook
-    wb = Workbook()
+    # Preparar dados
+    df_progresso = pd.DataFrame(progresso)
+    df_usuarios = pd.DataFrame(usuarios)
+    df_cursos = pd.DataFrame(cursos)
 
-    # Adicionar planilha para notas por módulo
-    ws_modulos = wb.active
-    ws_modulos.title = "Notas por Módulo"
-    ws_modulos.append(["Curso", "Módulo", "Usuário", "Pontos"])
+    # Carregar questionários (supondo que exista uma função para isso)
+    df_questionarios = pd.DataFrame(carregar_questionarios())
 
-    for registro in progresso:
-        ws_modulos.append([registro['curso'], registro['modulo'], registro['usuario'], registro['pontos']])
+    # Adicionar a nota máxima aos cursos
+    df_cursos = adicionar_nota_maxima_cursos(df_cursos, df_questionarios)
 
-    # Adicionar planilha para notas por curso
-    ws_cursos = wb.create_sheet(title="Notas por Curso")
-    ws_cursos.append(["Curso", "Soma das Notas"])
+    # Aba 1: Notas por Curso
+    notas_curso = (
+        df_progresso.groupby(['usuario', 'curso'])['pontos']
+        .sum()
+        .reset_index()
+        .merge(df_usuarios[['email', 'nome']], left_on='usuario', right_on='email')
+        .merge(df_cursos[['titulo', 'nota_maxima']], left_on='curso', right_on='titulo')
+    )
+    notas_curso['situacao'] = notas_curso.apply(
+        lambda x: 'Aprovado' if x['pontos'] >= 0.6 * x['nota_maxima'] else 'Reprovado', axis=1
+    )
+    notas_curso = notas_curso[['nome', 'curso', 'pontos', 'situacao']]
+    notas_curso.columns = ['Nome do Aluno', 'Curso', 'Nota', 'Situação']
 
-    cursos_dict = defaultdict(list)
-    for registro in progresso:
-        cursos_dict[registro['curso']].append(registro['pontos'])
+    # Aba 2: Notas por Módulo
+    notas_modulo = (
+        df_progresso.merge(df_usuarios[['email', 'nome']], left_on='usuario', right_on='email')
+        .merge(df_cursos[['titulo']], left_on='curso', right_on='titulo')
+    )
+    notas_modulo = notas_modulo[['nome', 'curso', 'modulo', 'pontos']]
+    notas_modulo.columns = ['Nome do Aluno', 'Curso', 'Módulo', 'Nota do Módulo']
 
-    for curso, notas in cursos_dict.items():
-        soma = sum(notas)
-        ws_cursos.append([curso, soma])
+    # Aba 3: Progresso por Módulo
+    progresso_modulo = (
+        df_progresso.groupby(['usuario', 'curso'])['modulo']
+        .nunique()
+        .reset_index()
+        .merge(df_usuarios[['email', 'nome']], left_on='usuario', right_on='email')
+        .merge(df_cursos[['titulo', 'total_modulos']], left_on='curso', right_on='titulo')
+    )
+    progresso_modulo['situacao'] = progresso_modulo.apply(
+        lambda x: 'Completo' if x['modulo'] == x['total_modulos'] else
+                  'Em andamento' if x['modulo'] > 0 else 'Incompleto', axis=1
+    )
+    progresso_modulo = progresso_modulo[['nome', 'curso', 'total_modulos', 'modulo', 'situacao']]
+    progresso_modulo.columns = ['Nome do Aluno', 'Curso', 'Número total de Módulos', 'Número de Módulos Completos', 'Situação']
 
-    # Adicionar planilha para notas por aluno
-    ws_alunos = wb.create_sheet(title="Notas por Aluno")
-    ws_alunos.append(["Usuário", "Curso", "Módulo", "Pontos"])
+    # Aba 4: Estatísticas por Módulo
+    estatisticas_modulo = (
+        df_progresso.groupby(['curso', 'modulo'])['pontos']
+        .agg([np.mean, lambda x: x.mode().iloc[0] if not x.mode().empty else np.nan, np.median])
+        .reset_index()
+    )
+    estatisticas_modulo.columns = ['Curso', 'Módulo', 'Média das Notas', 'Moda das Notas', 'Mediana das Notas']
 
-    for registro in progresso:
-        ws_alunos.append([registro['usuario'], registro['curso'], registro['modulo'], registro['pontos']])
+    # Aba 5: Estatísticas por Curso
+    estatisticas_curso = (
+        df_progresso.groupby('curso')['pontos']
+        .agg([np.mean, lambda x: x.mode().iloc[0] if not x.mode().empty else np.nan, np.median])
+        .reset_index()
+    )
+    estatisticas_curso.columns = ['Curso', 'Média das Notas', 'Moda das Notas', 'Mediana das Notas']
 
-    # Localizar a pasta de Downloads do usuário
+    # Criar arquivo Excel
     caminho_downloads = os.path.join(os.path.expanduser("~"), "Downloads")
-
-    # Garantir que a pasta de Downloads existe
     if not os.path.exists(caminho_downloads):
         console.print("[red]Erro: A pasta de Downloads não foi encontrada.[/red]")
         return
 
-    # Salvar o arquivo Excel na pasta de Downloads
     caminho_arquivo = os.path.join(caminho_downloads, "relatorio_notas.xlsx")
-    wb.save(caminho_arquivo)
+    with pd.ExcelWriter(caminho_arquivo, engine='openpyxl') as writer:
+        notas_curso.to_excel(writer, index=False, sheet_name="Notas por Curso")
+        notas_modulo.to_excel(writer, index=False, sheet_name="Notas por Módulo")
+        progresso_modulo.to_excel(writer, index=False, sheet_name="Progresso por Módulo")
+        estatisticas_modulo.to_excel(writer, index=False, sheet_name="Estatísticas por Módulo")
+        estatisticas_curso.to_excel(writer, index=False, sheet_name="Estatísticas por Curso")
+
     console.print(f"[green]Relatório Excel gerado com sucesso: {caminho_arquivo}[/green]")
 
 def input_numerico(mensagem, minimo=None, maximo=None):

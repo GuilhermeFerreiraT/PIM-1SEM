@@ -1,6 +1,6 @@
 import json
 import os
-from utils import carregar_progresso, carregar_cursos
+from utils import carregar_progresso, carregar_cursos, PROGRESSO_JSON, CURSOS_JSON, USUARIOS_JSON
 from rich.console import Console
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit import prompt
@@ -10,9 +10,7 @@ from config import sessao  # Importa a sessão do usuáriom questionario
 console = Console()
 
 # Nome dos arquivos JSON com o caminho especificado
-CURSOS_JSON = "SRC/NP1OFC/JSON/cursos.json"
-QUESTIONARIO_JSON = "SRC/NP1OFC/JSON/questionarios.json"
-PROGRESSO_JSON = "SRC/NP1OFC/JSON/progresso.json"
+QUESTIONARIO_JSON = "/NP1OFC/JSON/questionarios.json"
 
 # Verificar se o módulo statistics está disponível
 try:
