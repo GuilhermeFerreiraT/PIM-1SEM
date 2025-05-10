@@ -4,26 +4,11 @@ from rich.console import Console
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit import prompt
 from questionario import menu_quest
-from utils import carregar_cursos, salvar_cursos
-
+from utils import carregar_cursos, salvar_cursos, CURSOS_JSON
+from config import espaço_linhas
 
 # Inicializa o console para exibir mensagens coloridas
 console = Console()
-
-# Nome do arquivo JSON que armazenará todos os cursos
-CURSOS_JSON = "SRC/NP1OFC/JSON/cursos.json"
-
-def carregar_cursos():
-    # Carrega os cursos existentes do arquivo JSON.
-    if os.path.exists(CURSOS_JSON):
-        with open(CURSOS_JSON, 'r', encoding='utf-8') as arquivo:
-            return json.load(arquivo)
-    return []
-
-def salvar_cursos(cursos):
-    # Salva todos os cursos em um arquivo JSON.
-    with open(CURSOS_JSON, 'w', encoding='utf-8') as arquivo:
-        json.dump(cursos, arquivo, indent=4, ensure_ascii=False)
 
 def input_numerico(mensagem, minimo=None, maximo=None):
     while True:
@@ -64,15 +49,29 @@ def criar_curso():
             "conteudo": conteudo
         })
 
+    # Vincular o curso a uma classe
+    cursos_por_classe = {1: [], 2: [], 3: []}
+    for curso in cursos:
+        cursos_por_classe[curso["classe"]].append(curso["titulo"])
+
+    console.print("[blue]Escolha a classe para vincular ao curso:[/blue]")
+    for classe, cursos_vinculados in cursos_por_classe.items():
+        if cursos_vinculados:
+            console.print(f"{classe}. Classe {classe} ({', '.join(cursos_vinculados)})")
+        else:
+            console.print(f"{classe}. Classe {classe} (nenhum curso vinculado)")
+    classe = input_numerico("Classe (1, 2 ou 3): ", 1, 3)
+
     curso = {
         "id_curso": len(cursos) + 1,
         "titulo": titulo,
-        "modulos": modulos
+        "modulos": modulos,
+        "classe": classe  # Adiciona a classe vinculada ao curso
     }
 
     cursos.append(curso)
     salvar_cursos(cursos)
-    console.print(f"[green]Curso '{titulo}' cadastrado com sucesso![/green]")
+    console.print(f"[green]Curso '{titulo}' cadastrado com sucesso e vinculado à Classe {classe}![/green]")
 
 def listar_cursos():
     # Lista todos os cursos disponíveis.
@@ -162,14 +161,15 @@ def deletar_curso():
 def menu_altcursos():
     # Exibe o menu de opções.
     while True:
-        console.print("\nMenu:")
+        menu_banner = espaço_linhas("CURSOS", font="small")
+        console.print(f"[blue]{menu_banner}[blue]")
         console.print("- Cadastrar Curso")
         console.print("- Alterar Curso")
         console.print("- Deletar Curso")
         console.print("- Questionarios")
         console.print("- Sair")
         
-        wordcomp_adm = WordCompleter(['Cadastrar Curso', 'Alterar Curso', 'Deletar Curso', 'Questionario','Sair'], ignore_case=True)
+        wordcomp_adm = WordCompleter(['Cadastrar Curso', 'Alterar Curso', 'Deletar Curso', 'Questionarios','Sair'], ignore_case=True)
         escolha = prompt("Escolha uma opção: ", completer=wordcomp_adm)
 
         if escolha.lower() == 'cadastrar curso':
@@ -182,7 +182,9 @@ def menu_altcursos():
         elif escolha.lower() == 'questionarios':
             menu_quest()
         elif escolha.lower() == 'sair':
-            console.print("[red]Saindo do sistema...[/red]")
+            console.print("[red]Voltando ao menu principal...[/red]")
+            from menu import menu
+            menu()
             break
         else:
             console.print("[yellow]Opção inválida![/yellow]")

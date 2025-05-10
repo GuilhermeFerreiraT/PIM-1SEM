@@ -1,10 +1,9 @@
 import json
 from config import (
-    console, verificar_senha, sessao, espaço_linhas,
-    USUARIOS_JSON, FuzzyCompleter, WordCompleter
+    console, verificar_senha, sessao, espaço_linhas, FuzzyCompleter, WordCompleter
 )
 from prompt_toolkit import prompt
-from notas import atualizar_classe_usuario
+from utils import USUARIOS_JSON
 
 def login():
     menu_banner = espaço_linhas("LOGIN", font="small")
@@ -14,7 +13,13 @@ def login():
         wordcomp_email = WordCompleter(['@gmail.com', '@outlook.com'], ignore_case=True)
         completer_email = FuzzyCompleter(wordcomp_email)
         
-        email = prompt('Email: ', completer=completer_email)
+        while True:
+            email = prompt('Email: ', completer=completer_email)
+            if '@' not in email:
+                console.print("[red]E-mail inválido. Certifique-se de incluir '@'.[/red]")
+                continue
+            break
+
         senha_log = prompt("Senha: ", is_password=True)
 
         # Procurar usuário no arquivo JSON
@@ -32,12 +37,11 @@ def login():
                 sessao['usuario'] = email
                 sessao['perfil'] = usuario_encontrado["perfil"]
                 sessao['nome'] = usuario_encontrado["nome"]
-                sessao['classe'] = usuario_encontrado["classe"]
+                sessao['classe'] = usuario_encontrado.get("classe", None)  # Garantir que 'classe' seja obtida corretamente
                 sessao['cidade'] = usuario_encontrado["cidade"]
                 sessao['idade'] = usuario_encontrado["idade"]
                 sessao['id_usuario'] = usuario_encontrado["id_usuario"]
                 console.print(f"[green]Login bem-sucedido! Bem-vindo {usuario_encontrado['nome']} ({usuario_encontrado['perfil']}).[/green]")
-                atualizar_classe_usuario(email)  # Atualiza a classe do usuário após o login
             else:
                 console.print("[red]Usuário ou senha inválidos.[/red]")
         else:

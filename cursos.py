@@ -1,6 +1,7 @@
 import json
 import os
-from utils import carregar_progresso, carregar_cursos, PROGRESSO_JSON, CURSOS_JSON, USUARIOS_JSON
+from utils import (carregar_progresso, carregar_cursos, PROGRESSO_JSON, CURSOS_JSON, USUARIOS_JSON,
+carregar_questionarios, QUESTIONARIO_JSON)
 from rich.console import Console
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit import prompt
@@ -10,7 +11,7 @@ from config import sessao  # Importa a sessão do usuáriom questionario
 console = Console()
 
 # Nome dos arquivos JSON com o caminho especificado
-QUESTIONARIO_JSON = "/NP1OFC/JSON/questionarios.json"
+
 
 # Verificar se o módulo statistics está disponível
 try:
@@ -63,13 +64,6 @@ def registrar_progresso(usuario, curso, modulo, pontos):
     salvar_progresso(progresso)
 
 
-def carregar_questionarios():
-    # Carrega os questionários existentes do arquivo JSON.
-    if os.path.exists(QUESTIONARIO_JSON):
-        with open(QUESTIONARIO_JSON, 'r', encoding='utf-8') as arquivo:
-            return json.load(arquivo)
-    return []
-
 def exibir_menu_cursos():
     # Exibe o menu de cursos disponíveis.
     cursos = carregar_cursos()
@@ -86,7 +80,8 @@ def exibir_menu_cursos():
 
     if not cursos:
         console.print("[yellow]Nenhum curso disponível para sua classe.[/yellow]")
-        return None
+        from menu import menu
+        return menu()
 
     console.print("Cursos disponíveis:")
     for i, curso in enumerate(cursos):
@@ -95,25 +90,21 @@ def exibir_menu_cursos():
     return cursos
 
 def navegar_cursos():
-    # Navega pelos cursos e módulos.
     cursos = exibir_menu_cursos()
     if cursos is None:
         return
 
-    # Escolher um curso
-    titulos_cursos = [curso['titulo'] for curso in cursos]
-    wordcomp_cursos = WordCompleter(titulos_cursos, ignore_case=True)
-    escolha = prompt("Escolha o número do curso (ou 'x' para sair): ", completer=wordcomp_cursos)
-    if escolha.lower() == 'x':
-        console.print("[yellow]Operação cancelada.[/yellow]")
-        return
-
-    try:
-        indice_curso = int(escolha) - 1
-        curso = cursos[indice_curso]
-    except (ValueError, IndexError):
-        console.print("[red]Escolha inválida. Tente novamente.[/red]")
-        return
+    while True:
+        wordcomp_cursos = WordCompleter([curso['titulo'] for curso in cursos], ignore_case=True)
+        escolha = prompt("Digite o nome do curso (ou 'x' para sair): ", completer=wordcomp_cursos)
+        if escolha.lower() == 'x':
+            console.print("[yellow]Operação cancelada.[/yellow]")
+            return
+        curso = next((curso for curso in cursos if curso['titulo'].lower() == escolha.lower()), None)
+        if curso:
+            break
+        else:
+            console.print("[red]Curso não encontrado. Tente novamente.[/red]")
 
     # Navegar pelos módulos do curso
     for i, modulo in enumerate(curso['modulos']):
@@ -121,21 +112,21 @@ def navegar_cursos():
         console.print(f"Conteúdo: {modulo['conteudo']}")
 
         # Indicativo de avanço
-        console.print("[blue]Digite 'avançar' para prosseguir para o questionário ou 'retornar' para voltar ao menu principal.[/blue]")
+        console.print("[blue]Pressione 'Enter' para prosseguir para o questionário ou digite 'x' para retornar ao menu principal.[/blue]")
         
         # Opções para avançar ou retornar
         acao = prompt("Ação: ")
-        if acao.lower() == 'retornar':
+        if acao.lower() == 'x':
             console.print("[yellow]Retornando ao menu principal...[/yellow]")
             return
 
-        if acao.lower() == 'avançar':
+        if acao == '':
             questionario = carregar_questionarios()
-            questionario_modulo = [q for q in questionario if q['curso'] == curso['titulo'] and q['modulo'] == modulo['nome']]
+            questionario_modulo = [q for q in questionario if q.get('curso') == curso.get('titulo') and q.get('modulo') == modulo['nome']]
             if questionario_modulo:
                 realizar_questionario(questionario_modulo)
             else:
-                console.print("[red]Nenhum questionário encontrado para este módulo.[/red]")
+                console.print(f"[red]Nenhum questionário encontrado para o módulo '{modulo['nome']}' do curso '{curso['titulo']}'.[/red]")
             continue  # Avança para o próximo módulo
 
     console.print("[green]Você completou todos os módulos deste curso![/green]")
@@ -159,17 +150,17 @@ def realizar_questionario(questionario_modulo):
 
     for questionario in questionario_modulo:
         console.print(f"\nPergunta: {questionario['pergunta']}")
-        for i, opcao in enumerate(questionario['opcoes']):
-            console.print(f"{i + 1}. {opcao}")
+        for i, opcao in enumerate(questionario['opcoes'], start=1):  # Ajustar para começar do 1
+            console.print(f"{i}. {opcao}")
 
         resposta = prompt("Digite o número da sua resposta: ")
         try:
-            resposta_usuario = int(resposta) - 1
-            if resposta_usuario == questionario['resposta_correta']:
+            resposta_usuario = int(resposta)  # O índice da resposta do usuário já está 1-based
+            if resposta_usuario == questionario['resposta_correta']:  # Comparar diretamente com o índice 1-based
                 console.print("[green]Resposta correta![/green]")
                 pontos += 1
             else:
-                console.print(f"[red]Resposta incorreta! A resposta correta é: {questionario['opcoes'][questionario['resposta_correta']]}[/red]")
+                console.print(f"[red]Resposta incorreta! A resposta correta é: {questionario['opcoes'][questionario['resposta_correta'] - 1]}[/red]")
         except (ValueError, IndexError):
             console.print("[red]Resposta inválida. Tente novamente.[/red]")
 
@@ -237,36 +228,3 @@ def exibir_notas_alunos():
         except:
             console.print("  Moda: Não aplicável (sem valores únicos)")
 
-def menu():
-    # Exibe o menu principal.
-    while True:
-        usuario = sessao.get('usuario')  # Verifica se há um usuário logado
-        if not usuario:
-            console.print("[red]Nenhum usuário logado. Faça login para continuar.[/red]")
-            break
-
-        console.print(f"\n[blue]Bem-vindo, {sessao.get('nome')}![/blue]")
-        console.print("\nMenu:")
-        console.print("- Navegar Cursos")
-        if sessao.get('perfil') == 'admin':
-            console.print("- Visualizar Notas dos Alunos")
-        console.print("- Sair")
-        
-        opcoes = ['Navegar Cursos', 'Sair']
-        if sessao.get('perfil') == 'admin':
-            opcoes.append('Visualizar Notas dos Alunos')
-
-        wordcomp_menu = WordCompleter(opcoes, ignore_case=True)
-        escolha = prompt("Escolha uma opção: ", completer=wordcomp_menu)
-        if escolha.lower() == 'navegar cursos':
-            navegar_cursos()
-        elif escolha.lower() == 'visualizar notas dos alunos' and sessao.get('perfil') == 'admin':
-            exibir_notas_alunos()
-        elif escolha.lower() == 'sair':
-            console.print("[red]Saindo do sistema...[/red]")
-            break
-        else:
-            console.print("[yellow]Opção inválida![/yellow]")
-
-if __name__ == "__main__":
-    menu()

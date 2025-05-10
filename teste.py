@@ -1,13 +1,14 @@
-from utils import carregar_questionarios
-from rich.console import Console
+import questionary
 
-console = Console()
+def menu_interativo():
+    resposta = questionary.select(
+        "Escolha uma opção:",
+        choices=["Cadastro", "Login", "LGPD", "Sair"]
+    ).ask()
 
-# Carregar os questionários
-questionarios = carregar_questionarios()
+    if resposta:
+        print(f"Você escolheu: {resposta}")
+    else:
+        print("Nenhuma opção selecionada.")
 
-# Verificar se os questionários foram carregados corretamente
-if questionarios:
-    console.print(f"Colunas disponíveis: {list(questionarios[0].keys())}")
-else:
-    console.print("[red]Nenhum questionário encontrado ou arquivo vazio.[/red]")
+menu_interativo()

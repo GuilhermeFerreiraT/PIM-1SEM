@@ -48,27 +48,25 @@ def adicionar_nota_maxima_cursos(df_cursos, df_questionarios):
     return df_cursos
 
 def gerar_relatorio_excel():
-
     from utils import carregar_questionarios
+    from openpyxl.styles import PatternFill, Alignment
+    from openpyxl import load_workbook
+
     # Gera um relatório Excel com as notas.
     progresso = carregar_progresso()
     usuarios = carregar_usuarios()
     cursos = carregar_cursos()
+    questionarios = carregar_questionarios()
 
     if not progresso:
         console.print("[yellow]Nenhum progresso registrado até o momento.[/yellow]")
         return
 
-    # Preparar dados
+    # Preparar DataFrames
     df_progresso = pd.DataFrame(progresso)
     df_usuarios = pd.DataFrame(usuarios)
     df_cursos = pd.DataFrame(cursos)
-
-    # Carregar questionários (supondo que exista uma função para isso)
-    df_questionarios = pd.DataFrame(carregar_questionarios())
-
-    # Adicionar a nota máxima aos cursos
-    df_cursos = adicionar_nota_maxima_cursos(df_cursos, df_questionarios)
+    df_questionarios = pd.DataFrame(questionarios)
 
     # Aba 1: Notas por Curso
     notas_curso = (
@@ -76,7 +74,10 @@ def gerar_relatorio_excel():
         .sum()
         .reset_index()
         .merge(df_usuarios[['email', 'nome']], left_on='usuario', right_on='email')
-        .merge(df_cursos[['titulo', 'nota_maxima']], left_on='curso', right_on='titulo')
+        .merge(df_cursos[['titulo']], left_on='curso', right_on='titulo')
+    )
+    notas_curso['nota_maxima'] = notas_curso['curso'].apply(
+        lambda curso: len(df_questionarios[df_questionarios['curso'] == curso])
     )
     notas_curso['situacao'] = notas_curso.apply(
         lambda x: 'Aprovado' if x['pontos'] >= 0.6 * x['nota_maxima'] else 'Reprovado', axis=1
@@ -98,8 +99,9 @@ def gerar_relatorio_excel():
         .nunique()
         .reset_index()
         .merge(df_usuarios[['email', 'nome']], left_on='usuario', right_on='email')
-        .merge(df_cursos[['titulo', 'total_modulos']], left_on='curso', right_on='titulo')
+        .merge(df_cursos[['titulo', 'modulos']], left_on='curso', right_on='titulo')
     )
+    progresso_modulo['total_modulos'] = progresso_modulo['modulos'].apply(len)
     progresso_modulo['situacao'] = progresso_modulo.apply(
         lambda x: 'Completo' if x['modulo'] == x['total_modulos'] else
                   'Em andamento' if x['modulo'] > 0 else 'Incompleto', axis=1
@@ -110,7 +112,7 @@ def gerar_relatorio_excel():
     # Aba 4: Estatísticas por Módulo
     estatisticas_modulo = (
         df_progresso.groupby(['curso', 'modulo'])['pontos']
-        .agg([np.mean, lambda x: x.mode().iloc[0] if not x.mode().empty else np.nan, np.median])
+        .agg(mean='mean', moda=lambda x: x.mode().iloc[0] if not x.mode().empty else np.nan, mediana='median')
         .reset_index()
     )
     estatisticas_modulo.columns = ['Curso', 'Módulo', 'Média das Notas', 'Moda das Notas', 'Mediana das Notas']
@@ -118,7 +120,7 @@ def gerar_relatorio_excel():
     # Aba 5: Estatísticas por Curso
     estatisticas_curso = (
         df_progresso.groupby('curso')['pontos']
-        .agg([np.mean, lambda x: x.mode().iloc[0] if not x.mode().empty else np.nan, np.median])
+        .agg(mean='mean', moda=lambda x: x.mode().iloc[0] if not x.mode().empty else np.nan, mediana='median')
         .reset_index()
     )
     estatisticas_curso.columns = ['Curso', 'Média das Notas', 'Moda das Notas', 'Mediana das Notas']
@@ -130,14 +132,56 @@ def gerar_relatorio_excel():
         return
 
     caminho_arquivo = os.path.join(caminho_downloads, "relatorio_notas.xlsx")
-    with pd.ExcelWriter(caminho_arquivo, engine='openpyxl') as writer:
-        notas_curso.to_excel(writer, index=False, sheet_name="Notas por Curso")
-        notas_modulo.to_excel(writer, index=False, sheet_name="Notas por Módulo")
-        progresso_modulo.to_excel(writer, index=False, sheet_name="Progresso por Módulo")
-        estatisticas_modulo.to_excel(writer, index=False, sheet_name="Estatísticas por Módulo")
-        estatisticas_curso.to_excel(writer, index=False, sheet_name="Estatísticas por Curso")
+    try:
+        with pd.ExcelWriter(caminho_arquivo, engine='openpyxl') as writer:
+            notas_curso.to_excel(writer, index=False, sheet_name="Notas por Curso")
+            notas_modulo.to_excel(writer, index=False, sheet_name="Notas por Módulo")
+            progresso_modulo.to_excel(writer, index=False, sheet_name="Progresso por Módulo")
+            estatisticas_modulo.to_excel(writer, index=False, sheet_name="Estatísticas por Módulo")
+            estatisticas_curso.to_excel(writer, index=False, sheet_name="Estatísticas por Curso")
 
-    console.print(f"[green]Relatório Excel gerado com sucesso: {caminho_arquivo}[/green]")
+        # Aplicar formatações no Excel
+        workbook = load_workbook(caminho_arquivo)
+        fills = {
+            "header": PatternFill(start_color="D9D9D9", end_color="D9D9D9", fill_type="solid"),
+            "green": PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid"),
+            "red": PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid"),
+            "yellow": PatternFill(start_color="FFF2CC", end_color="FFF2CC", fill_type="solid")
+        }
+
+        for sheet_name in workbook.sheetnames:
+            sheet = workbook[sheet_name]
+
+            # Ajustar largura das colunas
+            for col in sheet.columns:
+                max_length = max(len(str(cell.value)) if cell.value else 0 for cell in col)
+                sheet.column_dimensions[col[0].column_letter].width = max_length + 2
+
+            # Aplicar cor ao cabeçalho
+            for cell in sheet[1]:
+                cell.fill = fills["header"]
+                cell.alignment = Alignment(horizontal="center", vertical="center")
+
+            # Formatação condicional para "Notas por Curso" e "Progresso por Módulo"
+            if sheet_name == "Notas por Curso":
+                for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=4, max_col=4):
+                    for cell in row:
+                        if cell.value == "Aprovado":
+                            cell.fill = fills["green"]
+                        elif cell.value == "Reprovado":
+                            cell.fill = fills["red"]
+            elif sheet_name == "Progresso por Módulo":
+                for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=5, max_col=5):
+                    for cell in row:
+                        if cell.value == "Completo":
+                            cell.fill = fills["green"]
+                        elif cell.value == "Em andamento":
+                            cell.fill = fills["yellow"]
+
+        workbook.save(caminho_arquivo)
+        console.print(f"[green]Relatório Excel gerado com sucesso: {caminho_arquivo}[/green]")
+    except PermissionError:
+        console.print("[red]Erro: O arquivo está aberto ou sem permissão para ser sobrescrito. Feche o arquivo e tente novamente.[/red]")
 
 def input_numerico(mensagem, minimo=None, maximo=None):
     while True:

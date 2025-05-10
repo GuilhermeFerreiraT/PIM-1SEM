@@ -1,14 +1,18 @@
 import json
 import os
-from utils import carregar_cursos  # Importar de utils.py
+from utils import carregar_cursos, carregar_questionarios, QUESTIONARIO_JSON
 from rich.console import Console
+from prompt_toolkit.completion import WordCompleter
+from prompt_toolkit import prompt
+from config import sessao, espaço_linhas
+from prompt_toolkit.completion import FuzzyCompleter
+from prompt_toolkit.styles import Style
 
 # Inicializa o console para exibir mensagens coloridas
 console = Console()
 
-# Nome do arquivo JSON que armazenará todos os questionários
-QUESTIONARIO_JSON = "SRC/NP1OFC/JSON/questionarios.json"
-PROGRESSO_JSON = "SRC/NP1OFC/JSON/progresso.json"
+PROGRESSO_JSON = "NP1OFC/JSON/progresso.json"
+
 
 def carregar_progresso():
     # Carrega o progresso dos usuários.
@@ -37,13 +41,6 @@ def registrar_progresso(usuario, curso, modulo, pontos):
     with open(PROGRESSO_JSON, 'w', encoding='utf-8') as arquivo:
         json.dump(progresso, arquivo, indent=4, ensure_ascii=False)
 
-def carregar_questionarios():
-    # Carrega os questionários existentes do arquivo JSON.
-    if os.path.exists(QUESTIONARIO_JSON):
-        with open(QUESTIONARIO_JSON, 'r', encoding='utf-8') as arquivo:
-            return json.load(arquivo)
-    return []
-
 def salvar_questionarios(questionarios):
     # Salva todos os questionários em um arquivo JSON.
     with open(QUESTIONARIO_JSON, 'w', encoding='utf-8') as arquivo:
@@ -69,7 +66,7 @@ def criar_questionario():
     # Coletando as opções de resposta
     opcoes = []
     for i in range(num_opcoes):
-        opcao = console.input(f"Digite a opção {i + 1} (ou 'x' para sair): ")
+        opcao = prompt(f"Digite a opção {i + 1} (ou 'x' para sair): ")
         if opcao.lower() == 'x':
             console.print("[yellow]Operação cancelada.[/yellow]")
             return
@@ -77,17 +74,57 @@ def criar_questionario():
 
     resposta_correta = input_numerico(f"Digite o número da opção correta (1 a {num_opcoes}): (ou 'x' para sair): ", 1, num_opcoes) - 1
 
-    vinculo_curso = console.input("Digite o curso vinculado ao questionário (ou 'x' para sair): ")
+    cursos = carregar_cursos()
 
-    vinculo_modulo= console.input("Digite o modulo vinculado ao questionário (ou 'x' para sair): ")
+    titulos_cursos = [curso['titulo'] for curso in cursos]
+    wordcomp_cursos = WordCompleter(titulos_cursos, ignore_case=True)
 
+    
+    for i, curso in enumerate(cursos):
+        console.print(f"{i + 1}. {curso['titulo']}")
+
+    vinculo_curso = prompt("Digite o curso vinculado ao questionário (ou 'x' para sair): ", completer=wordcomp_cursos)
+    if vinculo_curso.lower() == 'x':
+        console.print("[yellow]Operação cancelada.[/yellow]")
+        return 
+    
+    # Filtrar o curso escolhido para obter os módulos
+    while True:
+        curso_escolhido = next((curso for curso in cursos if curso['titulo'].lower() == vinculo_curso.lower()), None)
+        if curso_escolhido:
+            break
+        console.print("[red]Curso não encontrado. Por favor, insira um curso válido.[/red]")
+        vinculo_curso = prompt("Digite o curso vinculado ao questionário (ou 'x' para sair): ", completer=wordcomp_cursos)
+        if vinculo_curso.lower() == 'x':
+            console.print("[yellow]Operação cancelada.[/yellow]")
+            return
+
+    # Exibir os títulos dos módulos do curso escolhido
+    console.print("Módulos disponíveis:")
+    for i, modulo in enumerate(curso_escolhido['modulos']):
+        console.print(f"{i + 1}. {modulo['nome']}")
+
+    # Obter os títulos dos módulos do curso escolhido
+    titulos_modulos = [modulo['nome'] for modulo in curso_escolhido['modulos']]
+    wordcomp_modulos = WordCompleter(titulos_modulos, ignore_case=True)
+
+    while True:
+        vinculo_modulo = prompt("Digite o módulo vinculado ao questionário (ou 'x' para sair): ", completer=wordcomp_modulos)
+        if vinculo_modulo.lower() == 'x':
+            console.print("[yellow]Operação cancelada.[/yellow]")
+            return
+        if vinculo_modulo in titulos_modulos:
+            break
+        console.print("[red]Módulo não encontrado. Por favor, insira um módulo válido.[/red]")
 
     # Criando um dicionário para o questionário
     questionario = {
         "titulo": titulo,
         "pergunta": pergunta,
         "opcoes": opcoes,
-        "resposta_correta": resposta_correta
+        "resposta_correta": resposta_correta,
+        "curso": vinculo_curso,
+        "modulo": vinculo_modulo
     }
 
     # Adicionando o novo questionário à lista existente
@@ -244,25 +281,36 @@ def deletar_questionario():
     console.print("[green]Questionário deletado com sucesso![/green]")
 
 def menu_quest():
+
+    # Estilo e autocompletar
+    estilo = Style.from_dict({'': 'black'})
+    word_completer = WordCompleter(['Cadastrar Questionário', 'Alterar Questionário', 'Deletar Questionário', 'Sair'], ignore_case=True)
+    completer = FuzzyCompleter(word_completer)
     # Exibe o menu de opções.
     while True:
-        console.print("\nMenu:")
-        console.print("1. Cadastrar Questionário")
-        console.print("2. Alterar Questionário")
-        console.print("3. Deletar Questionário")
-        console.print("4. Sair")
+        menu_banner = espaço_linhas("Questionarios", font="small")
+        console.print(f"[blue]{menu_banner}[blue]")
+        console.print("- Cadastrar Questionário")
+        console.print("- Alterar Questionário")
+        console.print("- Deletar Questionário")
+        console.print("- Sair")
         
-        escolha = console.input("Escolha uma opção: ")
+        escolha = prompt(
+                [('class:prompt', 'Escolha a página: ')],
+                style=estilo,
+                completer=completer,
+                complete_while_typing=True
+        )
 
-        if escolha == '1':
+        if escolha == 'Cadastrar Questionário':
             criar_questionario()
-        elif escolha == '2':
+        elif escolha == 'Alterar Questionário':
             alterar_questionario()
-        elif escolha == '3':
+        elif escolha == 'Deletar Questionário':
             deletar_questionario()
-        elif escolha == '4':
-            console.print("[red]Saindo do sistema...[/red]")
-            break
+        elif escolha == 'Sair':
+            from menu import menu
+            menu()
         else:
             console.print("[yellow]Opção inválida![/yellow]")
 

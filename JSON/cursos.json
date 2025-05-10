@@ -1,116 +1,174 @@
 [
     {
-        "id_curso": 1,
-        "titulo": "Python para Iniciantes",
-        "classe": 1,
-        "modulos": [
-            {
-                "id_modulo": 1,
-                "nome": "Módulo 1: Introdução ao Python",
-                "conteudo": "Python é uma linguagem de programação de alto nível criada para ser simples de aprender e ler..."
-            },
-            {
-                "id_modulo": 2,
-                "nome": "Módulo 2: Sintaxe e Identação",
-                "conteudo": "Ao contrário de muitas outras linguagens, Python usa a indentação (espaços no início da linha)..."
-            },
-            {
-                "id_modulo": 3,
-                "nome": "Módulo 3: Tipos de Dados e Variáveis",
-                "conteudo": "Em Python, você pode armazenar diferentes tipos de informações em variáveis..."
-            }
-        ]
+      "id_curso": 1,
+      "titulo": "Introdução à Informática",
+      "classe": 1,
+      "modulos": [
+        {
+          "nome": "O que é Informática",
+          "conteudo": "A informática é a área do conhecimento que trata do uso de computadores e sistemas digitais para coletar, processar, armazenar e distribuir informações. Com o avanço tecnológico, ela se tornou essencial no cotidiano, presente em escolas, empresas, hospitais e no ambiente doméstico."
+        },
+        {
+          "nome": "Hardware e Software",
+          "conteudo": "Computadores possuem duas partes principais: hardware e software. O hardware são os componentes físicos, como monitor e teclado. O software é o conjunto de programas que executam tarefas e operam o sistema."
+        },
+        {
+          "nome": "Sistemas Operacionais",
+          "conteudo": "O sistema operacional é um software que gerencia os recursos do computador e permite que o usuário interaja com ele. Exemplos incluem Windows, Linux e macOS."
+        }
+      ]
     },
     {
-        "id_curso": 2,
-        "titulo": "Banco de Dados",
-        "classe": 1,
-        "modulos": [
-            {
-                "id_modulo": 10,
-                "nome": "Módulo 1: O que é um Banco de Dados?",
-                "conteudo": "Um banco de dados é uma coleção organizada de dados que pode ser facilmente acessada..."
-            },
-            {
-                "id_modulo": 11,
-                "nome": "Módulo 2: Modelagem de Dados",
-                "conteudo": "Modelagem de dados é o processo de criar um modelo para os dados que serão armazenados..."
-            },
-            {
-                "id_modulo": 12,
-                "nome": "Módulo 3: SQL - Structured Query Language",
-                "conteudo": "SQL é a linguagem padrão para interagir com bancos de dados relacionais..."
-            }
-        ]
+      "id_curso": 2,
+      "titulo": "Noções de Programação em Python",
+      "classe": 1,
+      "modulos": [
+        {
+          "nome": "O que é Programação",
+          "conteudo": "Programar é criar instruções que o computador executa. Isso permite desenvolver sistemas, sites e jogos, automatizando tarefas e solucionando problemas de forma lógica."
+        },
+        {
+          "nome": "Primeiros Passos com Python",
+          "conteudo": "Python é uma linguagem simples, ideal para iniciantes. Um comando básico é print(\"Olá, mundo!\"), que mostra essa mensagem na tela."
+        },
+        {
+          "nome": "Variáveis e Tipos de Dados",
+          "conteudo": "Variáveis armazenam valores no programa. Tipos comuns são números inteiros, textos (strings) e booleanos (verdadeiro ou falso)."
+        }
+      ]
     },
     {
-        "id_curso": 3,
-        "titulo": "Lógica de Programação",
-        "classe": 1,
-        "modulos": [
-            {
-                "id_modulo": 13,
-                "nome": "Módulo 1: Introdução à Lógica",
-                "conteudo": "Lógica é a base do pensamento computacional..."
-            }
-        ]
+      "id_curso": 3,
+      "titulo": "Segurança de Dados e LGPD",
+      "classe": 1,
+      "modulos": [
+        {
+          "nome": "Segurança de Dados",
+          "conteudo": "É o conjunto de práticas para proteger informações contra acesso indevido, perdas ou ataques. Inclui uso de senhas seguras, backups e antivírus."
+        },
+        {
+          "nome": "O que é LGPD",
+          "conteudo": "A LGPD é a Lei Geral de Proteção de Dados. Ela regula como empresas e órgãos públicos devem lidar com informações pessoais dos cidadãos, exigindo transparência e consentimento."
+        },
+        {
+          "nome": "Boas Práticas",
+          "conteudo": "Algumas boas práticas incluem usar autenticação em dois fatores, não clicar em links suspeitos, atualizar sistemas e manter antivírus ativado."
+        }
+      ]
     },
     {
-        "id_curso": 4,
-        "titulo": "Engenharia de Software",
-        "classe": 2,
-        "modulos": [
-            {
-                "id_modulo": 7,
-                "nome": "Módulo 1: O que é Engenharia de Software?",
-                "conteudo": "Engenharia de software é o campo que aplica princípios da engenharia para o desenvolvimento de sistemas..."
-            },
-            {
-                "id_modulo": 8,
-                "nome": "Módulo 2: Ciclo de Vida de Software",
-                "conteudo": "O ciclo de vida do software inclui etapas como: levantamento de requisitos, projeto, codificação..."
-            },
-            {
-                "id_modulo": 9,
-                "nome": "Módulo 3: Metodologias de Desenvolvimento",
-                "conteudo": "Existem várias metodologias como o modelo Cascata, Scrum, Kanban e XP..."
-            }
-        ]
+      "id_curso": 4,
+      "titulo": "Desenvolvimento Web com HTML e CSS",
+      "classe": 2,
+      "modulos": [
+        {
+          "nome": "Introdução ao HTML",
+          "conteudo": "HTML é a linguagem padrão para estruturar páginas da web, usando tags como <h1> e <p> para definir elementos como títulos e parágrafos."
+        },
+        {
+          "nome": "Introdução ao CSS",
+          "conteudo": "CSS define o estilo visual de uma página, como cores, tamanhos, espaçamentos e fontes. Ele funciona em conjunto com o HTML."
+        },
+        {
+          "nome": "Layout e Responsividade",
+          "conteudo": "Layout é como os elementos estão organizados na tela. Responsividade é a capacidade do site se adaptar a diferentes tamanhos de tela."
+        }
+      ]
     },
     {
-        "id_curso": 5,
-        "titulo": "Cibersegurança para Iniciantes",
-        "classe": 2,
-        "modulos": [
-            {
-                "id_modulo": 4,
-                "nome": "Módulo 1: Conceitos Básicos",
-                "conteudo": "Cibersegurança é a prática de proteger sistemas, redes e programas contra ataques digitais..."
-            },
-            {
-                "id_modulo": 5,
-                "nome": "Módulo 2: Tipos de Ameaças Digitais",
-                "conteudo": "As ameaças digitais podem incluir vírus, worms, ransomwares, phishing..."
-            },
-            {
-                "id_modulo": 6,
-                "nome": "Módulo 3: Boas Práticas de Segurança",
-                "conteudo": "Algumas boas práticas incluem manter sistemas atualizados, usar senhas fortes..."
-            }
-        ]
+      "id_curso": 5,
+      "titulo": "Programação Orientada a Objetos em Python",
+      "classe": 2,
+      "modulos": [
+        {
+          "nome": "Conceitos de Orientação a Objetos",
+          "conteudo": "Na programação orientada a objetos, usamos classes e objetos para organizar dados e comportamentos."
+        },
+        {
+          "nome": "Criando Classes e Objetos",
+          "conteudo": "Classes são moldes para objetos. Um objeto é uma instância da classe, com atributos e métodos."
+        },
+        {
+          "nome": "Encapsulamento e Herança",
+          "conteudo": "Encapsulamento protege os dados internos de um objeto. Herança permite reutilizar código de uma classe em outra."
+        }
+      ]
     },
     {
-        "id_curso": 6,
-        "titulo": "cursto teste",
-        "modulos": [
-            {
-                "nome": "modulo",
-                "conteudo": "modulo1"
-            },
-            {
-                "nome": "modulo2",
-                "conteudo": "xx"
-            }
-        ]
+      "id_curso": 6,
+      "titulo": "Banco de Dados e SQL",
+      "classe": 2,
+      "modulos": [
+        {
+          "nome": "O que é um Banco de Dados",
+          "conteudo": "Banco de dados é onde são armazenadas informações de forma organizada, geralmente em tabelas."
+        },
+        {
+          "nome": "Comandos Básicos em SQL",
+          "conteudo": "SQL é uma linguagem usada para consultar, inserir, atualizar e deletar dados em bancos de dados."
+        },
+        {
+          "nome": "Relacionamentos e Chaves",
+          "conteudo": "Relacionamentos conectam tabelas. Chaves primárias identificam registros e chaves estrangeiras fazem referência entre tabelas."
+        }
+      ]
+    },
+    {
+      "id_curso": 7,
+      "titulo": "Desenvolvimento Web com JavaScript e APIs",
+      "classe": 3,
+      "modulos": [
+        {
+          "nome": "Fundamentos do JavaScript",
+          "conteudo": "JavaScript é uma linguagem que permite interatividade em sites, como responder a cliques e alterar o conteúdo dinamicamente."
+        },
+        {
+          "nome": "Manipulação do DOM",
+          "conteudo": "O DOM representa o HTML como objetos que podem ser manipulados com JavaScript."
+        },
+        {
+          "nome": "Consumo de APIs",
+          "conteudo": "APIs permitem que sites busquem dados externos e atualizem conteúdo automaticamente."
+        }
+      ]
+    },
+    {
+      "id_curso": 8,
+      "titulo": "Aplicacoes Seguras e Criptografia",
+      "classe": 3,
+      "modulos": [
+        {
+          "nome": "Fundamentos de Segurança Digital",
+          "conteudo": "A segurança digital protege sistemas contra invasões e vazamentos, com práticas como senhas fortes e autenticação em dois fatores."
+        },
+        {
+          "nome": "Introdução à Criptografia",
+          "conteudo": "Criptografia é o processo de transformar dados para protegê-los contra acessos não autorizados."
+        },
+        {
+          "nome": "Boas Práticas de Segurança",
+          "conteudo": "Atualizar sistemas, validar entradas e usar HTTPS ajudam a garantir aplicações seguras."
+        }
+      ]
+    },
+    {
+      "id_curso": 9,
+      "titulo": "Análise de Dados com Python e Pandas",
+      "classe": 3,
+      "modulos": [
+        {
+          "nome": "Introdução à Análise de Dados",
+          "conteudo": "Analisar dados permite entender padrões, tomar decisões e melhorar estratégias com base em informações."
+        },
+        {
+          "nome": "Estrutura de Dados com Pandas",
+          "conteudo": "Pandas oferece estruturas como DataFrames para organizar e manipular dados em Python."
+        },
+        {
+          "nome": "Operações Básicas em Dados",
+          "conteudo": "Com Pandas, é possível filtrar, ordenar, agrupar e exportar dados de forma simples."
+        }
+      ]
     }
-]
+]     
+

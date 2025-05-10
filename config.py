@@ -5,7 +5,6 @@ from prompt_toolkit.styles import Style
 from rich.console import Console
 
 # Configurações do sistema
-USUARIOS_JSON = "NP1OFC/JSON/usuarios.json"
 sessao = {}
 
 def gerar_hash(senha):

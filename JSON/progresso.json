@@ -58,5 +58,107 @@
         "curso": "Cibersegurança para Iniciantes",
         "modulo": "Módulo 2: Tipos de Ameaças Digitais",
         "pontos": 0
+    },
+    {
+        "usuario": "guizin@outlook.com",
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 1: Introdução ao Python",
+        "pontos": 2
+    },
+    {
+        "usuario": "guizin@outlook.com",
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 2: Sintaxe e Identação",
+        "pontos": 2
+    },
+    {
+        "usuario": "guizin@outlook.com",
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 3: Tipos de Dados e Variáveis",
+        "pontos": 2
+    },
+    {
+        "usuario": "aluno@gmail.com",
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 1: Introdução ao Python",
+        "pontos": 2
+    },
+    {
+        "usuario": "aluna@gmail.com",
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 1: Introdução ao Python",
+        "pontos": 1
+    },
+    {
+        "usuario": "aluna@gmail.com",
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 2: Sintaxe e Identação",
+        "pontos": 2
+    },
+    {
+        "usuario": "aluna@gmail.com",
+        "curso": "Python para Iniciantes",
+        "modulo": "Módulo 3: Tipos de Dados e Variáveis",
+        "pontos": 2
+    },
+    {
+        "usuario": "aluno@gmail.com",
+        "curso": "curso 1",
+        "modulo": "1",
+        "pontos": 1
+    },
+    {
+        "usuario": "aluno@gmail.com",
+        "curso": "Introdução à Informática",
+        "modulo": "O que é Informática",
+        "pontos": 1
+    },
+    {
+        "usuario": "aluno@gmail.com",
+        "curso": "Introdução à Informática",
+        "modulo": "Hardware e Software",
+        "pontos": 0
+    },
+    {
+        "usuario": "aluno@gmail.com",
+        "curso": "Introdução à Informática",
+        "modulo": "Sistemas Operacionais",
+        "pontos": 0
+    },
+    {
+        "usuario": "alunonovo@gmail.com",
+        "curso": "Desenvolvimento Web com HTML e CSS",
+        "modulo": "Introdução ao HTML",
+        "pontos": 1
+    },
+    {
+        "usuario": "alunonovo@gmail.com",
+        "curso": "Desenvolvimento Web com HTML e CSS",
+        "modulo": "Introdução ao CSS",
+        "pontos": 1
+    },
+    {
+        "usuario": "alunonovo@gmail.com",
+        "curso": "Desenvolvimento Web com HTML e CSS",
+        "modulo": "Layout e Responsividade",
+        "pontos": 0
+    },
+    {
+        "usuario": "aluno3@gmail.com",
+        "curso": "Desenvolvimento Web com JavaScript e APIs",
+        "modulo": "Fundamentos do JavaScript",
+        "pontos": 0
+    },
+    {
+        "usuario": "aluno3@gmail.com",
+        "curso": "Desenvolvimento Web com JavaScript e APIs",
+        "modulo": "Manipulação do DOM",
+        "pontos": 1
+    },
+    {
+        "usuario": "1@gmail.com",
+        "curso": "Introdução à Informática",
+        "modulo": "O que é Informática",
+        "pontos": 2
     }
 ]
