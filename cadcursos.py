@@ -160,34 +160,43 @@ def deletar_curso():
 
 def menu_altcursos():
     # Exibe o menu de opções.
-    while True:
-        menu_banner = espaço_linhas("CURSOS", font="small")
-        console.print(f"[blue]{menu_banner}[blue]")
-        console.print("- Cadastrar Curso")
-        console.print("- Alterar Curso")
-        console.print("- Deletar Curso")
-        console.print("- Questionarios")
-        console.print("- Sair")
-        
-        wordcomp_adm = WordCompleter(['Cadastrar Curso', 'Alterar Curso', 'Deletar Curso', 'Questionarios','Sair'], ignore_case=True)
-        escolha = prompt("Escolha uma opção: ", completer=wordcomp_adm)
+    from config import sessao  # Supondo que você tenha uma função para verificar sessão
 
-        if escolha.lower() == 'cadastrar curso':
-            criar_curso()
-        elif escolha.lower() == 'alterar curso':
-            alterar_curso()
-        elif escolha.lower() == 'deletar curso':
-            deletar_curso()
+    if 'perfil' in sessao:
+        while True:
+            menu_banner = espaço_linhas("CURSOS", font="small")
+            console.print(f"[blue]{menu_banner}[blue]")
+            console.print("- Cadastrar Curso")
+            console.print("- Alterar Curso")
+            console.print("- Deletar Curso")
+            console.print("- Questionarios")
+            console.print("- Sair")
+            
+            wordcomp_adm = WordCompleter(['Cadastrar Curso', 'Alterar Curso', 'Deletar Curso', 'Questionarios','Sair'], ignore_case=True)
+            escolha = prompt("Escolha uma opção: ", completer=wordcomp_adm)
 
-        elif escolha.lower() == 'questionarios':
-            menu_quest()
-        elif escolha.lower() == 'sair':
-            console.print("[red]Voltando ao menu principal...[/red]")
-            from menu import menu
-            menu()
-            break
-        else:
-            console.print("[yellow]Opção inválida![/yellow]")
+            if escolha.lower() == 'cadastrar curso':
+                criar_curso()
+            elif escolha.lower() == 'alterar curso':
+                alterar_curso()
+            elif escolha.lower() == 'deletar curso':
+                deletar_curso()
+            elif escolha.lower() == 'questionarios':
+                menu_quest()
+            elif escolha.lower() == 'sair':
+                console.print("[red]Voltando ao menu principal...[/red]")
+                from menu import menu
+                menu()
+                break
+            else:
+                console.print("[yellow]Opção inválida![/yellow]")
+
+    else:
+        console.print("[red]Você não está logado. retornando ao menu inicial[/red]")
+        from menu import menu
+        menu()  
+
+
 
 if __name__ == "__main__":
     menu_altcursos()

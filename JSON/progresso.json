@@ -160,5 +160,11 @@
         "curso": "Introdução à Informática",
         "modulo": "O que é Informática",
         "pontos": 2
+    },
+    {
+        "usuario": "Aluno5@gmail.com",
+        "curso": "Introdução à Informática",
+        "modulo": "O que é Informática",
+        "pontos": 1
     }
 ]

@@ -58,5 +58,55 @@
         "idade": 1,
         "cidade": "1",
         "classe": 1
+    },
+    {
+        "id_usuario": 7,
+        "nome": "Aluno",
+        "email": "Aluno5@gmail.com",
+        "senha": "$2b$12$pIsqHhtPkAJ21scMNdoIxeQ5wHouh3V3S7TlzMhRZpknoCebi3/9G",
+        "perfil": "aluno",
+        "idade": 15,
+        "cidade": "Cajamar",
+        "classe": 1
+    },
+    {
+        "id_usuario": 8,
+        "nome": "aluno1",
+        "email": "aluno1@gmail.com",
+        "senha": "$2b$12$3RL0V4UHSyw.AbOEn2RNAeqvhnd1IpWnRYxwhmpM7bwLYnduxdmwi",
+        "perfil": "aluno",
+        "idade": 15,
+        "cidade": "25",
+        "classe": 3
+    },
+    {
+        "id_usuario": 9,
+        "nome": "alunogui",
+        "email": "alunogui@gmail.com",
+        "senha": "$2b$12$e39fcktngUmljPFFKR55iO3yyI6U5roRhY4wjmp13ZvOqlKu8fAwa",
+        "perfil": "aluno",
+        "idade": 15,
+        "cidade": "SP",
+        "classe": 2
+    },
+    {
+        "id_usuario": 10,
+        "nome": "teste",
+        "email": "$2b$12$p0pEf/DusoTkeuUhcjLMqOpUYO./6wFJb0nYndjHBqY1JoaUNKL0i",
+        "senha": "$2b$12$95m4VKtfkr3wxk52IP3MTO/1akdmLk77vKx0LrGXwLEs/656AQGqG",
+        "perfil": "aluno",
+        "idade": "$2b$12$x1wprzZZ5CG8dmMivUvVWumokxA0LSj7HxyrWLW9ofYjFXsPPEh3i",
+        "cidade": "$2b$12$UM5R.AOcUi.fnpty7Wvub..O4sIZe6A0EdEYMstCyXqky.BB05Oy6",
+        "classe": 3
+    },
+    {
+        "id_usuario": 11,
+        "nome": "alunonum500",
+        "email": "aluno500@gmail.com",
+        "senha": "$2b$12$SN8s8nLCSJEmhaa4IT0V/eF.ZHpzD1ZIjNlNjtaFYJUgB2BCG.rZG",
+        "perfil": "aluno",
+        "idade": "$2b$12$VbsXjcDDGXxPmjYMdzYc8.TJHHRyjEkV3i23hmNqdPCmQQnBpdgm6",
+        "cidade": "$2b$12$jjDiXmaAGLgYrdTilHdq..XeemSSZchtFEBzAZhhpgAxUWGMj9XgC",
+        "classe": 3
     }
 ]

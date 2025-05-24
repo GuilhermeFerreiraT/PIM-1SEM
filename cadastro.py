@@ -120,6 +120,8 @@ def cadastro():
                 console.print("[red]Senha inválida. Tente novamente.[/red]")
 
         senha_hash = gerar_hash(senha)
+        idade_hash = gerar_hash(str(idade))
+        cidade_hash = gerar_hash(cidade)
 
         novo_usuario = {
             "id_usuario": num_usuarios + 1,
@@ -127,8 +129,8 @@ def cadastro():
             "email": email,
             "senha": senha_hash,
             "perfil": perfil,
-            "idade": idade,
-            "cidade": cidade,
+            "idade": idade_hash,
+            "cidade": cidade_hash,
             "classe": classe
         }
 
@@ -149,3 +151,7 @@ def cadastro():
 
     except Exception as e:
         console.print(f"[red]Erro no cadastro: {e}[/red]")
+
+    if 'perfil' in sessao:
+        from menu import menu
+        menu()            

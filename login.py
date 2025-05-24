@@ -1,6 +1,6 @@
 import json
 from config import (
-    console, verificar_senha, sessao, espaço_linhas, FuzzyCompleter, WordCompleter
+    console, verificar_valor, sessao, espaço_linhas, FuzzyCompleter, WordCompleter
 )
 from prompt_toolkit import prompt
 from utils import USUARIOS_JSON
@@ -33,7 +33,7 @@ def login():
                 break
 
         if usuario_encontrado:
-            if verificar_senha(senha_log, usuario_encontrado["senha"]):
+            if verificar_valor(senha_log, usuario_encontrado["senha"]):
                 sessao['usuario'] = email
                 sessao['perfil'] = usuario_encontrado["perfil"]
                 sessao['nome'] = usuario_encontrado["nome"]
@@ -53,3 +53,7 @@ def login():
         console.print("[red]Erro ao ler arquivo de usuários.[/red]")
     except Exception as e:
         console.print(f"[red]Erro no login: {e}[/red]")
+
+    if 'perfil' in sessao:
+        from menu import menu
+        menu()    

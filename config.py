@@ -7,12 +7,12 @@ from rich.console import Console
 # Configurações do sistema
 sessao = {}
 
-def gerar_hash(senha):
+def gerar_hash(valor):
     salt = bcrypt.gensalt()
-    return bcrypt.hashpw(senha.encode('utf-8'), salt).decode('utf-8')
+    return bcrypt.hashpw(valor.encode('utf-8'), salt).decode('utf-8')
 
-def verificar_senha(senha_log, senha_hash):
-    return bcrypt.checkpw(senha_log.encode('utf-8'), senha_hash.encode('utf-8'))
+def verificar_valor(valor_original, hash_armazenado):
+    return bcrypt.checkpw(valor_original.encode('utf-8'), hash_armazenado.encode('utf-8'))
 
 console = Console()
 
